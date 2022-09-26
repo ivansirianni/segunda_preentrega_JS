@@ -89,11 +89,11 @@ function mostrarCatalogo(array){
         </div>`
         productos_stock.append(stock_card)
     })
-    let btnAgregar = document.getElementById(`comprar_carrito${farmacia.id}`)
-        console.log(btnAgregar)
-        btnAgregar.addEventListener("click", ()=>{
-            console.log(stock)
-            agregar_carrito(stock)
+    let btn_compra = document.getElementById(`comprar_producto${farmacia.id}`)
+        console.log(btn_compra)
+        btn_compra.addEventListener("click", ()=>{
+            console.log(farmacia)
+            agregar_carrito(farmacia)
 
         })
 }
