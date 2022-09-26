@@ -42,7 +42,7 @@ li{
 /* ---- Main ----*/
 /*section title*/
 #section_h1{
-    height: 100vh;
+    height: 50vh;
     background-image: url("/sources/bg.jpg");
     background-position: center;
     background-repeat: no-repeat;
