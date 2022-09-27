@@ -83,7 +83,7 @@ let btn_ocultar_sucu = document.getElementById("ocultar_sucu") //BOTON OCULTAR S
 
 let destacados = [] //PARA ARRAY DE DESTACADOS
 
-let productos_carrito = [] // PARA ARRAY DE LOS PRODUCTOS QUE ENTRAN AL CARRITO
+let productos_carrito =  [] // PARA ARRAY DE LOS PRODUCTOS QUE ENTRAN AL CARRITO
 
 let boton_carrito = document.getElementById("boton_carrito") // BOTON DEL CARRITO
 
@@ -94,6 +94,8 @@ let modal_body = document.getElementById("modal-body") // MODAL DE LA CARD DE LO
 let btn_finalizar = document.getElementById("btnFinalizarCompra") // BOTON PARA FINALIZAR COMPRA
 
 let precio_total = document.getElementById('precioTotal') // PARA CALCULAR PRECIO TOTAL
+
+
 
 
 //FUNCIONES
@@ -183,6 +185,7 @@ function ocultarSucu(){
 
 // --------------- PARA LLENAR EL CARRITO
 function llenar_carrito(array){
+    
     modal_body.innerHTML = ""
     array.forEach((producto_carrito)=>{
 
@@ -193,16 +196,27 @@ function llenar_carrito(array){
                     <h4 class="card-title">${producto_carrito.producto}</h4>
                 
                     <p class="card-text">$${producto_carrito.precio}</p> 
-                    <button class= "btn btn-danger eliminar" id="btn_eliminar"><i class="fas fa-trash-alt"></i></button>
+                    <button id="btn_eliminar${productos_carrito.id}" class= "btn btn-danger"><i class="fas fa-trash-alt"></i></button>
             </div>  
              
         </div>
 `
-    
+//modal_body.append(productos_carrito)
+     //PARA ELIMINAR CADA PRODUCTO   
+     let btn_elimina = document.getElementById(`btn_eliminar${productos_carrito.id}`)
+     let id = producto_carrito.id
+
+     btn_elimina.addEventListener("click", ()=>{
+        let productosIndex = productos_carrito.findIndex(element => element.id == id)
+        productos_carrito.splice(productosIndex, 1)        
+        localStorage.setItem("productos_carrito", JSON.stringify(productos_carrito))
+        llenar_carrito(productos_carrito)
+     })
     })
     
     total_compra(array)
 }
+productos_carrito = JSON.parse(localStorage.getItem(productos_carrito)) || []
 //--------------- PARA CALCULAR EL PRECIO TOTAl
 function total_compra(array){
     let acumulador = 0
